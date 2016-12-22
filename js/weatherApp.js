@@ -34,8 +34,8 @@ var dataPlacement = function(data,loc){
     $("#rain-chance").text("Rain Chance: "+data["daily"]["data"][0]["precipProbability"]*100+"%");
     
     //temperatures
-    $("#temperature-current").text("Temp: " + Math.floor(data["currently"]["temperature"]));
-    $("#temperature-maxmin").text("Temp max/min: " + Math.floor(data["daily"]["data"][0]["temperatureMax"]) + "/" + Math.floor(data["daily"]["data"][0]["temperatureMin"]));    
+    $("#temperature-current").text(Math.floor(data["currently"]["temperature"])+"°C");
+    $("#temperature-maxmin").text(Math.floor(data["daily"]["data"][0]["temperatureMax"]) + "°C/" + Math.floor(data["daily"]["data"][0]["temperatureMin"])+"°C");    
     
     //the address 
     getAddress(loc);
@@ -44,7 +44,7 @@ var dataPlacement = function(data,loc){
     $("#wind").text("Wind Speed: "+data["daily"]["data"][0]["windSpeed"]);
     
     //icon    
-    var skycons = new Skycons({"color": "black"});
+    var skycons = new Skycons({"color": "gray"});
 
     // you can add a canvas by it's ID...
     skycons.add("weather-icon", data["currently"]["icon"]);

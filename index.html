@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         
@@ -19,19 +20,56 @@
 
     <body>
         <div class="container">
+            
             <div class="row">
-                <div class="col-xs-12" id="weatherSection">
-                    <p id="weather">--</p>
+                <div class="col-xs-12 col-sm-6">                        
+                    <h3 id="weather">--</h3>
                     <p id="weather-description">--</p>
-                    <p id="rain-chance">--</p>
+                </div>
+                <div class="col-xs-12 col-sm-6" id="temperature">                    
+                    <h3 id="temperature-maxmin">--</h3>
                     <p id="temperature-current">--</p>
-                    <p id="temperature-maxmin">--</p>
-                    <p id="address">--</p>
-                    <p id="wind">--</p>
-                    <canvas id="weather-icon" width="128" height="128"></canvas>
-                    <a target="_blank" href="https://darksky.net/poweredby/"><p>Powered by Dark Sky</p></a>
                 </div>
             </div>
-        </div>        
+            
+            <div class="row" id="weather-section">                
+                <div class="col-xs-12 col-sm-4">
+                    <p id="address">--</p>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <canvas id="weather-icon" width="128" height="128"></canvas>                 
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <p id="rain-chance">--</p>     
+                    <p id="wind">--</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12" id="powered-by">                        
+                    <a target="_blank" href="https://darksky.net/poweredby/"><p>Powered by Dark Sky</p></a> 
+                </div>
+            </div>            
+        </div> 
+        
+        <footer id="footer-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-sm-3"></div>
+                        <div class="col-xs-12 col-sm-2 col-sm-push-2 footer-content">
+                            <p>Created by Tolga Parlan</p>                                            
+                        </div>
+                        <div class="col-xs-12 col-sm-2 col-sm-pull-2 footer-content">
+                            <a href="#"><p>My Portfolio</p></a>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 footer-content">
+                            <a href="#"><p>My GitHub Page <i class="fa fa-github" aria-hidden="true"></i></p></a>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+                </div>  
+            </div>
+        </footer>
     </body>
 </html>

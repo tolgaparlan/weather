@@ -1,3 +1,65 @@
-#weatherSection{
+body{
+    color: #f3e5e5;
+    background-color: #181819;
+}
+
+#weather-section{
     text-align: center;
+    padding: 40px;
+    font-size: 1.5em;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+#weather{
+    font-size: 5em;
+    text-align: left;    
+}
+
+#weather-description{
+    text-align: left; 
+    padding-left: 20px;
+}
+
+#temperature{
+    font-size: 3em;
+    text-align: right;
+}
+
+#temperature-maxmin{
+    font-size: 2em;
+}
+
+
+@media(max-width:768px){
+    #weather{
+        font-size: 3em;
+        text-align: center;    
+    }
+    #temperature{
+        font-size: 2em;
+        text-align: center;
+    }    
+    #temperature-maxmin{
+        font-size: 1em;
+    }
+    
+    #weather-description{
+        text-align: center; 
+        padding-left: 0px;
+    }
+}
+
+#powered-by{
+    text-align: right;
+}
+
+#footer-content{
+    padding: 20px 0px 25px 0px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+a, a:visited{
+    color: #772828;
 }
