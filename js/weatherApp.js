@@ -1,12 +1,17 @@
-$(document).ready(function() {    
+$(document).ready(function() {  //fires when everything is properly loaded  
     weatherDisplay();
 });
 
 //get the user location and put in a suitable format for the API
 var weatherDisplay = function(){
-    if(navigator.geolocation){
+    if(navigator.geolocation){ //try to use geolocation for precise location. tends to fail in phones for some reason
         navigator.geolocation.getCurrentPosition(function(loc){
             dataGrab(loc["coords"]["latitude"]+","+loc["coords"]["longitude"]); //acquire the weather data for the given location
+        });
+    }else{ //if it fails, just use the ip location. very inaccurate though..
+        $.getJSON("https://ipinfo.io",function(data){
+            dataGrab(data["loc"]);
+            alert("Couldn't get your precise location. Using (inaccurate) IP address location");
         });
     }
 }; 
@@ -41,7 +46,7 @@ var dataPlacement = function(data,loc){
     getAddress(loc);
     
     //wind speed
-    $("#wind").text("Wind Speed: "+data["daily"]["data"][0]["windSpeed"]);
+    $("#wind").text("Wind Speed: "+data["daily"]["data"][0]["windSpeed"]+" km/h");
     
     //icon    
     var skycons = new Skycons({"color": "gray"});
