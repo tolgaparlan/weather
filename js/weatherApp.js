@@ -4,15 +4,22 @@ $(document).ready(function() {  //fires when everything is properly loaded
 
 //get the user location and put in a suitable format for the API
 var weatherDisplay = function(){
-    navigator.geolocation.getCurrentPosition(function(loc){  //try to use geolocation for precise location. tends to fail in phones for some reason
-        dataGrab(loc["coords"]["latitude"]+","+loc["coords"]["longitude"]); //acquire the weather data for the given location
-    },fallback(),{maximumAge:10000, timeout:5000, enableHighAccuracy:true});   
+    roughLocation();//this should make sure even in devices that geolocation doesn't work, some close estimate will be shown
+    preciseLocation(); 
 }
 
-var fallback = function(){
+//use google's geolocation API. More stabile but tends to be slightly off (or sometimes a lot)
+var roughLocation = function(){
     $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBsD60C9sqevu_5EXhyl_bCphqoGLBO8do",function(data){
         dataGrab(data["location"]["lat"]+","+data["location"]["lng"]);
     });
+}
+
+//try to use device's geolocation for precise location. tends to fail in phones for some reason
+var preciseLocation = function(){
+    navigator.geolocation.getCurrentPosition(function(loc){  
+        dataGrab(loc["coords"]["latitude"]+","+loc["coords"]["longitude"]); //acquire the weather data for the given location
+    });   
 }
 
 //get the weather data from the API
@@ -47,8 +54,9 @@ var dataPlacement = function(data,loc){
     //wind speed
     $("#wind").text("Wind Speed: "+data["daily"]["data"][0]["windSpeed"]+" km/h");
     
-    //icon    
+    //icon and it's animation  
     var skycons = new Skycons({"color": "gray"});
+    skycons.play();
 
     // you can add a canvas by it's ID...
     skycons.add("weather-icon", data["currently"]["icon"]);
