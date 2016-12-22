@@ -1,4 +1,6 @@
-$(document).ready(function() {          
+ $("weather").text("at least this works");
+$(document).ready(function() { 
+    $("weather").text("works");
     weatherDisplay();
 });
 
