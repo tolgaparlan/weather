@@ -1,20 +1,19 @@
 $(document).ready(function() {  //fires when everything is properly loaded  
-    weatherDisplay();
+    weatherDisplay();  
 });
 
 //get the user location and put in a suitable format for the API
 var weatherDisplay = function(){
-    if(navigator.geolocation){ //try to use geolocation for precise location. tends to fail in phones for some reason
-        navigator.geolocation.getCurrentPosition(function(loc){
-            dataGrab(loc["coords"]["latitude"]+","+loc["coords"]["longitude"]); //acquire the weather data for the given location
-        });
-    }else{ //if it fails, just use the ip location. very inaccurate though..
-        $.getJSON("https://ipinfo.io",function(data){
-            dataGrab(data["loc"]);
-            alert("Couldn't get your precise location. Using (inaccurate) IP address location");
-        });
-    }
-}; 
+    navigator.geolocation.getCurrentPosition(function(loc){  //try to use geolocation for precise location. tends to fail in phones for some reason
+        dataGrab(loc["coords"]["latitude"]+","+loc["coords"]["longitude"]); //acquire the weather data for the given location
+    },fallback(),{maximumAge:10000, timeout:5000, enableHighAccuracy:true});   
+}
+
+var fallback = function(){
+    $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBsD60C9sqevu_5EXhyl_bCphqoGLBO8do",function(data){
+        dataGrab(data["location"]["lat"]+","+data["location"]["lng"]);
+    });
+}
 
 //get the weather data from the API
 var dataGrab = function(loc){
