@@ -1,5 +1,12 @@
+var unit = "ca"; //global variable forfahrenheit/si
+
 $(document).ready(function() {  //fires when everything is properly loaded  
-    weatherDisplay();  
+    weatherDisplay();     
+
+    $("#unit-change").click(function(){//when the button is pressed
+        unit = (unit=="ca" ? "us" : "ca"); 
+        weatherDisplay();
+    });
 });
 
 //get the user location and put in a suitable format for the API
@@ -25,16 +32,16 @@ var preciseLocation = function(){
 //get the weather data from the API
 var dataGrab = function(loc){
     var time = Math.floor(Date.now()/1000); //returns a unix timestamp
-    var unit = "ca"; //add option to switch to fahrenheit
     var url = "https://api.darksky.net/forecast/9b7da12d061643778caa8aff7c3b85cf/" + loc + ","+time+"?callback=?&units="+unit+"&exclude=flags,hourly";
     $.getJSON(url,function(data){
         dataPlacement(data,loc);
-        console.log(data);
     });
 }
 
 //place the weather data into HTML elements
 var dataPlacement = function(data,loc){
+    var tempSuffix = (unit=="ca"? "°C" : "°F");
+    
     //main weather event
     $("#weather").text(data["currently"]["summary"]);
     
@@ -45,8 +52,8 @@ var dataPlacement = function(data,loc){
     $("#rain-chance").text("Rain Chance: "+data["daily"]["data"][0]["precipProbability"]*100+"%");
     
     //temperatures
-    $("#temperature-current").text(Math.floor(data["currently"]["temperature"])+"°C");
-    $("#temperature-maxmin").text(Math.floor(data["daily"]["data"][0]["temperatureMax"]) + "°C/" + Math.floor(data["daily"]["data"][0]["temperatureMin"])+"°C");    
+    $("#temperature-current").text(Math.floor(data["currently"]["temperature"])+tempSuffix);
+    $("#temperature-maxmin").text(Math.floor(data["daily"]["data"][0]["temperatureMax"]) + tempSuffix+"/" + Math.floor(data["daily"]["data"][0]["temperatureMin"])+tempSuffix);    
     
     //the address 
     getAddress(loc);

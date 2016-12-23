@@ -31,6 +31,16 @@ body{
     font-size: 2em;
 }
 
+#temperature-current{
+    display: inline;
+}
+
+#unit-change{
+    background-color: #772828;
+    border:none;
+    display: inline;
+    margin: 0px 15px 10px 0px;
+}
 
 @media(max-width:768px){
     #weather{
