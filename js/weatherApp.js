@@ -49,7 +49,7 @@ var dataPlacement = function(data,loc){
     $("#weather-description").text(data["daily"]["data"][0]["summary"]);
     
     //daily rain chance
-    $("#rain-chance").text("Rain Chance: "+data["daily"]["data"][0]["precipProbability"]*100+"%");
+    $("#rain-chance").text("Rain Chance: "+Math.floor(data["daily"]["data"][0]["precipProbability"]*100)+"%");
     
     //temperatures
     $("#temperature-current").text(Math.floor(data["currently"]["temperature"])+tempSuffix);
